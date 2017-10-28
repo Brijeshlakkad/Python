@@ -1,0 +1,296 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>The_Talent</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
+<link href="css/brijesh.css" rel="stylesheet">
+</head>
+<body>
+<nav class="navbar navbar-default navbar-fixed-top" role="navigation">
+    <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="index.php"><abbr title="The Talent">TT</abbr></a>
+    </div> 
+    <div class="navbar-collapse collapse">
+        <ul class="nav navbar-nav">
+            <li class="active"><a href="index.php">THE TALENT</a></li>	
+        </ul>
+		<ul class="nav navbar-nav navbar-right">
+				 <li><a href="#signupmodal" data-toggle="modal"><span class="glyphicon glyphicon-user"></span> Signup</a></li>
+		    	<li><a href="#loginmodal" data-toggle="modal"><span class="glyphicon glyphicon-log-in"></span> Login</a></li>
+		</ul>
+    </div>   
+</nav>
+<div class="modal fade" id="loginmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+         		   <div class="modal-dialog">
+             		   <div class="modal-content">
+               		    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h3 class="modal-title"><center>Log in</center></h3>
+                    </div>
+                    <div class="modal-body">
+<center style="margin:30px;padding:30px;">
+<form action="login.php" method="post" enctype="multipart/form-data" onSubmit="return logfun()" class="form-horizontal tpad" role="form">
+<div class="input-group">
+    <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+    <input id="lemail" type="text" class="form-control" name="email" placeholder="Email">
+</div>
+<p id="mlemail"></p>
+<div class="input-group">
+    <span class="input-group-addon"><i class="glyphicon glyphicon-lock"></i></span>
+    <input id="lpass" type="password" class="form-control" name="password" placeholder="Password">
+</div>
+<p id="mlpass"></p>
+<button class="btn btn-primary"  type="submit">Secure Log in <b class="glyphicon glyphicon-lock"></b></button>
+<br> 
+<br>
+<a href="#signupmodal" data-toggle="modal">Create a new account ?</a>
+</form>
+</center>
+</div>
+<div class="modal-footer">
+                        <a href="index.php" class="btn btn-default btn-lg">OK</a>
+                    </div>
+                </div>
+           </div>
+</div>
+<div class="modal fade" id="signupmodal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+         		   <div class="modal-dialog">
+             		   <div class="modal-content">
+               		    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                        <h3 class="modal-title"><center>Sing Up!</center></h3>
+                    </div>
+                    <div class="modal-body">
+					<center>
+<div class="container">
+<form action="myphp.php" name="form1" method="post" enctype="multipart/form-data" onSubmit="return signfun()" class="form-horizontal tpad" >
+<div class="form-group row">
+<div class="col-lg-offset-1 col-md-1"></div>
+<div class="col-xs-8">
+	<label for="name" class="col-lg-4 control-label">First name</label>
+    	  	<div class="col-lg-8">
+              	<input type="text" name="fname" class="form-control" id="fname"  autocomplete="off">
+   	    	</div>
+</div>
+<div class="col-lg-offset-1 col-md-1"></div>
+</div>
+<p id="mfname"></p>
+<div class="form-group row">
+<div class="col-lg-offset-1 col-md-1"></div>
+<div class="col-xs-8">
+	<label for="name" class="col-lg-4 control-label">Last name</label>
+    	  	<div class="col-lg-8">
+              	<input type="text" name="lname" class="form-control" id="lname" autocomplete="off">
+   	    	</div>
+</div>
+<div class="col-lg-offset-1 col-md-1"></div>
+</div>
+<p id="mlname"></p>
+<div class="form-group row">
+<div class="col-lg-offset-1 col-md-1"></div>
+<div class="col-xs-8">
+	<label for="email" class="col-lg-4 control-label">Email</label>
+    	  	<div class="col-lg-8">
+              	<input type="text" name="email" id="email" class="form-control" autocomplete="off">
+   	    	</div>
+</div>
+<div class="col-lg-offset-1 col-md-1"></div>
+</div>
+<p id="memail"></p>
+<div class="form-group row">
+<div class="col-lg-offset-1 col-md-1"></div>
+<div class="col-xs-8">
+	<label for="mobile" class="col-lg-4 control-label">Mobile no</label>
+    	  	<div class="col-lg-8">
+              	<input type="text" name="mno" id="mno"  class="form-control" autocomplete="off">
+   	    	</div>
+</div>
+<div class="col-lg-offset-1 col-md-1"></div>
+</div>
+<p id="mmno"></p>
+<div class="form-group row">
+<div class="col-lg-offset-1 col-md-1"></div>
+<div class="col-xs-8">
+	<label for="password" class="col-lg-4 control-label">Password</label>
+    	  	<div class="col-lg-8">
+				<input type="password" name="pass"  id="pass" autocomplete="off"  class="form-control">
+   	    	</div>
+</div>
+<div class="col-lg-offset-1 col-md-1"></div>
+</div>
+<p id="mpass"></p>
+<div class="form-group row">
+<div class="col-lg-offset-1 col-md-1"></div>
+<div class="col-xs-8">
+	<label for="cpassword" class="col-lg-4 control-label">Conform Password</label>
+    	  	<div class="col-lg-8">
+				<input type="password" name="cpass"  id="cpass" autocomplete="off" class="form-control">
+   	    	</div>
+</div>
+<div class="col-lg-offset-1 col-md-1"></div>
+</div>
+<p id="mcpass"></p>
+<br>
+<input class="btn btn-success"  type="submit" value="Sign Up">
+</form>
+</div>
+<br>
+<a href="index.html#loginmodal" data-toggle="modal"  data-dismiss="modal" aria-hidden="true">Already have a account ?</a>
+</center>
+
+                    </div>
+                    <div class="modal-footer">
+                        <a href="index.php" class="btn btn-default btn-lg">OK</a>
+                    </div>
+                </div>
+           </div>
+</div>
+<script type="text/javascript">
+function signfun(){
+	var fname = document.getElementById("fname").value;
+	var lname = document.getElementById("lname").value;
+	var email = document.getElementById("email").value;
+	var mno = document.getElementById("mno").value;
+	var pas = document.getElementById("pass").value;
+	if(fname=='')
+		{
+			document.getElementById("fname").focus();
+			document.getElementById("mfname").innerHTML="Please fill up - First Name";
+			return false;
+		}
+		else
+		{
+			document.getElementById("mfname").innerHTML="";
+		}
+		if(lname=='')
+		{
+			document.getElementById("lname").focus();
+			document.getElementById("mlname").innerHTML="Please fill up - Last Name";
+			return false;
+		}
+		else
+		{
+			document.getElementById("mlname").innerHTML="";
+		}
+	if(email=='')
+		{
+			document.getElementById("email").focus();
+			document.getElementById("memail").innerHTML="Please fill up - Email";
+			return false;
+		}
+		else
+		{
+			document.getElementById("memail").innerHTML="";
+		}
+	var m="^[\\w-_\.]*[\\w-_\.]\@[\\w]\.+[\\w]+[\\w]$";
+	if (email.match(m))
+	{
+		document.getElementById("memail").innerHTML="";
+	}
+	else{
+		document.getElementById("email").focus();
+		document.getElementById("memail").innerHTML="Wrong email id";
+		return false;
+	}
+	if(mno=='')
+		{
+			document.getElementById("mno").focus();
+			document.getElementById("mmno").innerHTML="Please fill up - Mobile Number";
+			return false;
+		}
+		else
+		{
+			document.getElementById("mmno").innerHTML="";
+		}
+	if (mno.length==10)
+	{
+		document.getElementById("mmno").innerHTML="";
+	}
+	else{
+		document.getElementById("mno").focus();
+		document.getElementById("mmno").innerHTML="Mobile Number should be 10 digit";
+		return false;
+	}
+	if(pas=='')
+		{
+			document.getElementById("pass").focus();
+			document.getElementById("mpass").innerHTML="Please fill up - Password";
+			return false;
+		}
+		else
+		{
+			document.getElementById("mpass").innerHTML="";
+		}
+	var m=/^[0-9]+[!@#$%^&*]$/;
+	if (pas.match(m)&&(pas.length<12||pas.length>6))
+	{
+		document.getElementById("mpass").innerHTML="";
+	}
+	else{
+		document.getElementById("pass").focus();
+		document.getElementById("mpass").innerHTML="Password must contain at least one special character and length must be between 8 to 12";
+		return false;
+	}
+	var cpas = document.getElementById("cpass").value;
+	if (cpas==pas)
+	{
+		document.getElementById("mcpass").innerHTML="";
+	}
+	else{
+		document.getElementById("cpass").focus();
+		document.getElementById("mcpass").innerHTML="Password does not match";
+		return false;
+	}
+
+}
+function logfun(){
+	var email = document.getElementById("lemail").value;
+	var pas = document.getElementById("lpass").value;
+	if(email=='')
+		{
+			document.getElementById("lemail").focus();
+			document.getElementById("mlemail").innerHTML="Please fill up - Email";
+			return false;
+		}
+		else
+		{
+			document.getElementById("mlemail").innerHTML="";
+		}
+	var m="^[\\w-_\.]*[\\w-_\.]\@[\\w]\.+[\\w]+[\\w]$";
+	if (email.match(m))
+	{
+		document.getElementById("mlemail").innerHTML="";
+	}
+	else{
+		document.getElementById("lemail").focus();
+		document.getElementById("mlemail").innerHTML="Wrong email id";
+		return false;
+	}
+	if(pas=='')
+		{
+			document.getElementById("lpass").focus();
+			document.getElementById("mlpass").innerHTML="Please fill up - Password";
+			return false;
+		}
+		else
+		{
+			document.getElementById("mlpass").innerHTML="";
+		}
+}
+
+function al()
+{
+alert('Please - Login/Signup');
+}
+</script>
+<script src="js/jquery.js"></script>
+<script src="js/bootstrap.min.js"></script>
+</body>
+</html>

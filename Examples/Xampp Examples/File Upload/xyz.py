@@ -1,0 +1,32 @@
+#!C:\Users\RAJ\AppData\Local\Programs\Python\Python36\python
+import cgi, os
+import cgitb; 
+
+print 'Content-Type: text/plain'
+print 
+print 'Hello World!'
+cgitb.enable()
+form = cgi.FieldStorage()
+
+# Get filename here.
+fileitem = form['filename']
+
+# Test if the file was uploaded
+if fileitem.filename:
+   # strip leading path from file name to avoid 
+   # directory traversal attacks
+   fn = os.path.basename(fileitem.filename)
+   open('/tmp/' + fn, 'wb').write(fileitem.file.read())
+
+   message = 'The file "' + fn + '" was uploaded successfully'
+   
+else:
+   message = 'No file was uploaded'
+   
+print ("""
+<html>
+<body>
+   <p>%s</p>
+</body>
+</html>
+""" % (message))
