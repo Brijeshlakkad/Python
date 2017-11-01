@@ -1,0 +1,583 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0044)https://automatetheboringstuff.com/chapter4/ -->
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" type="text/css" href="./chapter4_files/automate_website.css">
+  
+  <title>Automate the Boring Stuff with Python</title>
+</head>
+
+<body>
+  <div class="top_header">
+  <a href="https://automatetheboringstuff.com/">Home</a> | <a href="https://www.nostarch.com/automatestuff">Buy on No Starch Press</a> | <a href="http://www.amazon.com/gp/product/1593275994/ref=as_li_tl?ie=UTF8&amp;camp=1789&amp;creative=9325&amp;creativeASIN=1593275994&amp;linkCode=as2&amp;tag=playwithpyth-20&amp;linkId=HDM7V3T6RHC5VVN4">Buy on Amazon</a> | <a href="https://twitter.com/AlSweigart">@AlSweigart</a> | <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+            <input type="hidden" name="cmd" value="_s-xclick"> <input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----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-----END PKCS7----- "> <input type="image" src="./chapter4_files/btn_donate_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!"> <img alt="" border="0" src="./chapter4_files/pixel.gif" width="1" height="1" hidden="" style="display: none !important;">
+          </form></div>
+
+  <div class="main">
+	
+				
+<article id="post-113" class="post-113 page type-page status-publish hentry">
+	<header class="entry-header">
+		<h1 class="entry-title">Chapter  4 – Lists</h1>	</header><!-- .entry-header -->
+
+	<div class="entry-content">
+		<p></p><center><a href="https://automatetheboringstuff.com/chapter3"><img src="./chapter4_files/prev.png"></a><a href="https://automatetheboringstuff.com/#toc"><img src="./chapter4_files/toc.png"></a><a href="https://automatetheboringstuff.com/chapter5"><img src="./chapter4_files/next.png"></a><br>Support the Author: Buy the book on <a href="http://www.amazon.com/gp/product/1593275994/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&amp;camp=1789&amp;creative=9325&amp;creativeASIN=1593275994&amp;linkCode=as2&amp;tag=playwithpyth-20&amp;linkId=2KIYOE7RFLG7D2RJ">Amazon</a> or<br><a href="http://www.nostarch.com/automatestuff">the book/ebook bundle directly from No Starch Press</a>.<br><a href="http://www.nostarch.com/automatestuff"><img class=" size-full wp-image-49 aligncenter" src="./chapter4_files/automate_small_cover.png" alt="small_cover" width="170" height="225"></a><br><a href="https://inventwithpython.com/">Read the author's other free Python books:</a><br><a href="https://inventwithpython.com/chapters"><img src="./chapter4_files/smallcover_invent.png" width="120"></a> <a href="https://inventwithpython.com/pygame/chapters"><img src="./chapter4_files/smallcover_makinggames.png" width="120"></a> <a href="https://inventwithpython.com/hacking/chapters"><img src="./chapter4_files/smallcover_hacking.png" width="120"></a></center><p></p>
+<div class="calibre" id="calibre_link-93">
+<div class="book" title="Chapter 4. Lists">
+<div class="titlepage">
+<div class="book">
+<div class="book">
+<h1 class="title1"><a id="calibre_link-2232" class="firstname"></a>Lists</h1>
+</div>
+</div>
+</div>
+<p><a href="https://youtu.be/5n6o1MaXDoE"><img src="./chapter4_files/youtubelogo.png"> Lesson 13 - Lists, Indexes, Slices, and the list() Function</a></p>
+<p class="calibre4">One more topic you’ll need to understand before you can begin writing programs in earnest is the list data type and its cousin, the tuple. Lists and tuples can contain multiple values, which makes it easier to write programs that handle large amounts of data. And since lists themselves can contain other lists, you can use them to arrange data into hierarchical structures.</p>
+<p class="calibre4">In this chapter, I’ll discuss the basics of lists. I’ll also teach you about methods, which are functions that are tied to values of a certain data type. Then I’ll briefly cover the list-like tuple and string data types and how they compare to list values. In the next chapter, I’ll introduce you to the dictionary data type.</p>
+<div class="book" title="The List Data Type">
+<div class="titlepage">
+<div class="book">
+<div class="book">
+<h1 class="title2"><a id="calibre_link-2233" class="firstname"></a>The List Data Type</h1>
+</div>
+</div>
+</div>
+<p class="calibre4"><a id="calibre_link-195" class="calibre1"></a><a id="calibre_link-343" class="calibre1"></a><a id="calibre_link-414" class="calibre1"></a><a id="calibre_link-864" class="calibre1"></a><a id="calibre_link-982" class="calibre1"></a><a id="calibre_link-983" class="calibre1"></a><a id="calibre_link-1610" class="calibre1"></a>A <span class="calibre1"><em class="calibre5">list</em></span> is a value that contains multiple values in an ordered sequence. The term <span class="calibre1"><em class="calibre5">list value</em></span> refers to the list itself (which is a value that can be stored in a variable or passed to a function like any other value), not the values inside the list value. A list value looks like this: <code class="literal1">['cat', 'bat', 'rat', 'elephant']</code>. Just as string values are typed with quote characters to mark where the string begins and ends, a list begins with an opening square bracket and ends with a closing square bracket, <code class="literal1">[]</code>. Values inside the list are also called <span class="calibre1"><em class="calibre5">items</em></span>. Items are separated with commas (that is, they are <span class="calibre1"><em class="calibre5">comma-delimited</em></span>). For example, enter the following into the interactive shell:</p>
+<p><a id="calibre_link-2234" class="calibre1"></a>
+</p><pre class="programlisting">   &gt;&gt;&gt; <span class="calibre1"><strong class="literal">[1, 2, 3]</strong></span>
+   [1, 2, 3]
+   &gt;&gt;&gt; <span class="calibre1"><strong class="literal">['cat', 'bat', 'rat', 'elephant']</strong></span>
+   ['cat', 'bat', 'rat', 'elephant']
+   &gt;&gt;&gt; <span class="calibre1"><strong class="literal">['hello', 3.1415, True, None, 42]</strong></span>
+   ['hello', 3.1415, True, None, 42]
+❶ &gt;&gt;&gt; <span class="calibre1"><strong class="literal">spam = ['cat', 'bat', 'rat', 'elephant']</strong></span>
+   &gt;&gt;&gt; <span class="calibre1"><strong class="literal">spam</strong></span>
+   ['cat', 'bat', 'rat', 'elephant']</pre>
+<p class="calibre4">The <code class="literal1">spam</code> variable ❶ is still assigned only one value: the list value. But the list value itself contains other values. The value <code class="literal1">[]</code> is an empty list that contains no values, similar to <code class="literal1">''</code>, the empty string.</p>
+<div class="book" title="Getting Individual Values in a List with Indexes">
+<div class="titlepage">
+<div class="book">
+<div class="book">
+<h2 class="title3"><a id="calibre_link-2235" class="firstname"></a>Getting Individual Values in a List with Indexes</h2>
+</div>
+</div>
+</div>
+<p class="calibre4">Say you have the list <code class="literal1">['cat', 'bat', 'rat', 'elephant']</code> stored in a variable named <code class="literal1">spam</code>. The Python code <code class="literal1">spam[0]</code> would evaluate to <code class="literal1">'cat'</code>, and <code class="literal1">spam[1]</code> would evaluate to <code class="literal1">'bat'</code>, and so on. The integer inside the square brackets that follows the list is called an <span class="calibre1"><em class="calibre5">index</em></span>. The first value in the list is at index <code class="literal1">0</code>, the second value is at index <code class="literal1">1</code>, the third value is at index <code class="literal1">2</code>, and so on. <a class="ulink" href="https://automatetheboringstuff.com/chapter4/#calibre_link-123" title="Figure 4-1. A list value stored in the variable spam, showing which value each index refers to">Figure&nbsp;4-1</a> shows a list value assigned to <code class="literal1">spam</code>, along with what the index expressions would evaluate to.</p>
+<div class="figure"><a id="calibre_link-123" class="calibre1"></a>
+<div class="book">
+<div class="book"><a id="calibre_link-2236" class="calibre1"></a><img src="./chapter4_files/000074.png" alt="A list value stored in the variable spam, showing which value each index refers to" class="calibre8"></div>
+</div>
+<p class="title4">Figure&nbsp;4-1.&nbsp;A list value stored in the variable <code class="literal1">spam</code>, showing which value each index refers to</p>
+</div>
+<p class="calibre4">For example, type the following expressions into the interactive shell. Start by assigning a list to the variable <code class="literal1">spam</code>.</p>
+<p><a id="calibre_link-2237" class="calibre1"></a>
+</p><pre class="programlisting">   &gt;&gt;&gt; <span class="calibre1"><strong class="literal">spam = ['cat', 'bat', 'rat', 'elephant']</strong></span>
+   &gt;&gt;&gt; <span class="calibre1"><strong class="literal">spam[0]</strong></span>
+   'cat'
+   &gt;&gt;&gt; <span class="calibre1"><strong class="literal">spam[1]</strong></span>
+   'bat'
+   &gt;&gt;&gt; <span class="calibre1"><strong class="literal">spam[2]</strong></span>
+   'rat'
+   &gt;&gt;&gt; <span class="calibre1"><strong class="literal">spam[3]</strong></span>
+   'elephant'
+   &gt;&gt;&gt; <span class="calibre1"><strong class="literal">['cat', 'bat', 'rat', 'elephant'][3]</strong></span>
+   'elephant'
+❶ &gt;&gt;&gt; 'Hello ' + spam[0]
+❷ <span class="calibre1"><strong class="literal">'Hello cat'</strong></span>
+   &gt;&gt;&gt; 'The ' <span class="calibre1"><strong class="literal">+ spam[1] + ' ate the ' + spam[0] + '.'</strong></span>
+   'The bat ate the cat.'</pre>
+<p class="calibre4"><a id="calibre_link-1749" class="calibre1"></a>Notice that the expression <code class="literal1">'Hello ' + spam[0]</code> ❶ evaluates to <code class="literal1">'Hello ' + 'cat'</code> because <code class="literal1">spam[0]</code> evaluates to the string <code class="literal1">'cat'</code>. This expression in turn evaluates to the string value <code class="literal1">'Hello cat'</code> ❷.</p>
+<p class="calibre4">Python will give you an <code class="literal1">IndexError</code> error message if you use an index that exceeds the number of values in your list value.</p>
+<p><a id="calibre_link-2238" class="calibre1"></a>
+</p><pre class="programlisting">&gt;&gt;&gt; <span class="calibre1"><strong class="literal">spam = ['cat', 'bat', 'rat', 'elephant']</strong></span>
+&gt;&gt;&gt; <span class="calibre1"><strong class="literal">spam[10000]</strong></span>
+Traceback (most recent call last):
+  File "&lt;pyshell#9&gt;", line 1, in &lt;module&gt;
+    spam[10000]
+IndexError: list index out of range</pre>
+<p class="calibre4">Indexes can be only integer values, not floats. The following example will cause a <code class="literal1">TypeError</code> error:</p>
+<p><a id="calibre_link-2239" class="calibre1"></a>
+</p><pre class="programlisting">&gt;&gt;&gt; <span class="calibre1"><strong class="literal">spam = ['cat', 'bat', 'rat', 'elephant']</strong></span>
+&gt;&gt;&gt; <span class="calibre1"><strong class="literal">spam[1]</strong></span>
+'bat'
+&gt;&gt;&gt; <span class="calibre1"><strong class="literal">spam[1.0]</strong></span>
+Traceback (most recent call last):
+  File "&lt;pyshell#13&gt;", line 1, in &lt;module&gt;
+    spam[1.0]
+TypeError: list indices must be integers, not float
+&gt;&gt;&gt; <span class="calibre1"><strong class="literal">spam[int(1.0)]</strong></span>
+'bat'</pre>
+<p class="calibre4">Lists can also contain other list values. The values in these lists of lists can be accessed using multiple indexes, like so:</p>
+<p><a id="calibre_link-2240" class="calibre1"></a>
+</p><pre class="programlisting">&gt;&gt;&gt; <span class="calibre1"><strong class="literal">spam = [['cat', 'bat'], [10, 20, 30, 40, 50]]</strong></span>
+&gt;&gt;&gt; <span class="calibre1"><strong class="literal">spam[0]</strong></span>
+['cat', 'bat']
+&gt;&gt;&gt; <span class="calibre1"><strong class="literal">spam[0][1]</strong></span>
+'bat'
+&gt;&gt;&gt; <span class="calibre1"><strong class="literal">spam[1][4]</strong></span>
+50</pre>
+<p class="calibre4">The first index dictates which list value to use, and the second indicates the value within the list value. For example, <code class="literal1">spam[0][1]</code> prints <code class="literal1">'bat'</code>, the second value in the first list. If you only use one index, the program will print the full list value at that index.</p>
+</div>
+<div class="book" title="Negative Indexes">
+<div class="titlepage">
+<div class="book">
+<div class="book">
+<h2 class="title3"><a id="calibre_link-2241" class="firstname"></a>Negative Indexes</h2>
+</div>
+</div>
+</div>
+<p class="calibre4"><a id="calibre_link-211" class="calibre1"></a><a id="calibre_link-334" class="calibre1"></a><a id="calibre_link-865" class="calibre1"></a><a id="calibre_link-984" class="calibre1"></a><a id="calibre_link-985" class="calibre1"></a><a id="calibre_link-1153" class="calibre1"></a><a id="calibre_link-1589" class="calibre1"></a><a id="calibre_link-1680" class="calibre1"></a>While indexes start at <code class="literal1">0</code> and go up, you can also use negative integers for the index. The integer value <code class="literal1">-1</code> refers to the last index in a list, the value <code class="literal1">-2</code> refers to the second-to-last index in a list, and so on. Enter the following into the interactive shell:</p>
+<p><a id="calibre_link-2242" class="calibre1"></a>
+</p><pre class="programlisting">&gt;&gt;&gt; <span class="calibre1"><strong class="literal">spam = ['cat', 'bat', 'rat', 'elephant']</strong></span>
+&gt;&gt;&gt; <span class="calibre1"><strong class="literal">spam[-1]</strong></span>
+'elephant'
+&gt;&gt;&gt; <span class="calibre1"><strong class="literal">spam[-3]</strong></span>
+'bat'
+&gt;&gt;&gt; <span class="calibre1"><strong class="literal">'The ' + spam[-1] + ' is afraid of the ' + spam[-3] + '.'</strong></span>
+'The elephant is afraid of the bat.'</pre>
+</div>
+<div class="book" title="Getting Sublists with Slices">
+<div class="titlepage">
+<div class="book">
+<div class="book">
+<h2 class="title3"><a id="calibre_link-2243" class="firstname"></a>Getting Sublists with Slices</h2>
+</div>
+</div>
+</div>
+<p class="calibre4">Just as an index can get a single value from a list, a <span class="calibre1"><em class="calibre5">slice</em></span> can get several values from a list, in the form of a new list. A slice is typed between square brackets, like an index, but it has two integers separated by a colon. Notice the difference between indexes and slices.</p>
+<div class="book">
+<ul class="itemizedlist">
+<li class="listitem">
+<p class="calibre4"><code class="literal1">spam[2]</code> is a list with an index (one integer).</p>
+</li>
+<li class="listitem">
+<p class="calibre4"><code class="literal1">spam[1:4]</code> is a list with a slice (two integers).</p>
+</li>
+</ul>
+</div>
+<p class="calibre4">In a slice, the first integer is the index where the slice starts. The second integer is the index where the slice ends. A slice goes up to, but will not include, the value at the second index. A slice evaluates to a new list value. Enter the following into the interactive shell:</p>
+<p><a id="calibre_link-2244" class="calibre1"></a>
+</p><pre class="programlisting">&gt;&gt;&gt; <span class="calibre1"><strong class="literal">spam = ['cat', 'bat', 'rat', 'elephant']</strong></span>
+&gt;&gt;&gt; <span class="calibre1"><strong class="literal">spam[0:4]</strong></span>
+['cat', 'bat', 'rat', 'elephant']
+&gt;&gt;&gt; <span class="calibre1"><strong class="literal">spam[1:3]</strong></span>
+['bat', 'rat']
+&gt;&gt;&gt; <span class="calibre1"><strong class="literal">spam[0:-1]</strong></span>
+['cat', 'bat', 'rat']</pre>
+<p class="calibre4">As a shortcut, you can leave out one or both of the indexes on either side of the colon in the slice. Leaving out the first index is the same as using <code class="literal1">0</code>, or the beginning of the list. Leaving out the second index is the same as using the length of the list, which will slice to the end of the list. Enter the following into the interactive shell:</p>
+<p><a id="calibre_link-2245" class="calibre1"></a>
+</p><pre class="programlisting">&gt;&gt;&gt; <span class="calibre1"><strong class="literal">spam = ['cat', 'bat', 'rat', 'elephant']</strong></span>
+&gt;&gt;&gt; <span class="calibre1"><strong class="literal">spam[:2]</strong></span>
+['cat', 'bat']
+&gt;&gt;&gt; <span class="calibre1"><strong class="literal">spam[1:]</strong></span>
+['bat', 'rat', 'elephant']
+&gt;&gt;&gt; <span class="calibre1"><strong class="literal">spam[:]</strong></span>
+['cat', 'bat', 'rat', 'elephant']</pre>
+</div>
+<div class="book" title="Getting a List’s Length with len()">
+<div class="titlepage">
+<div class="book">
+<div class="book">
+<h2 class="title3"><a id="calibre_link-2246" class="firstname"></a>Getting a List’s Length with len()</h2>
+</div>
+</div>
+</div>
+<p class="calibre4"><a id="calibre_link-179" class="calibre1"></a><a id="calibre_link-188" class="calibre1"></a><a id="calibre_link-223" class="calibre1"></a><a id="calibre_link-361" class="calibre1"></a><a id="calibre_link-866" class="calibre1"></a><a id="calibre_link-955" class="calibre1"></a><a id="calibre_link-986" class="calibre1"></a><a id="calibre_link-987" class="calibre1"></a><a id="calibre_link-988" class="calibre1"></a><a id="calibre_link-989" class="calibre1"></a><a id="calibre_link-1136" class="calibre1"></a><a id="calibre_link-1490" class="calibre1"></a>The <code class="literal1">len()</code> function will return the number of values that are in a list value passed to it, just like it can count the number of characters in a string value. Enter the following into the interactive shell:</p>
+<p><a id="calibre_link-2247" class="calibre1"></a>
+</p><pre class="programlisting">&gt;&gt;&gt; <span class="calibre1"><strong class="literal">spam = ['cat', 'dog', 'moose']</strong></span>
+&gt;&gt;&gt; <span class="calibre1"><strong class="literal">len(spam)</strong></span>
+3</pre>
+</div>
+<div class="book" title="Changing Values in a List with Indexes">
+<div class="titlepage">
+<div class="book">
+<div class="book">
+<h2 class="title3"><a id="calibre_link-2248" class="firstname"></a>Changing Values in a List with Indexes</h2>
+</div>
+</div>
+</div>
+<p class="calibre4">Normally a variable name goes on the left side of an assignment statement, like <code class="literal1">spam = 42</code>. However, you can also use an index of a list to change the value at that index. For example, <code class="literal1">spam[1] = 'aardvark'</code> means “Assign the value at index <code class="literal1">1</code> in the list <code class="literal1">spam</code> to the string <code class="literal1">'aardvark'</code>.” Enter the following into the interactive shell:</p>
+<p><a id="calibre_link-2249" class="calibre1"></a>
+</p><pre class="programlisting">&gt;&gt;&gt; <span class="calibre1"><strong class="literal">spam = ['cat', 'bat', 'rat', 'elephant']</strong></span>
+&gt;&gt;&gt; <span class="calibre1"><strong class="literal">spam[1] = 'aardvark'</strong></span>
+&gt;&gt;&gt; <span class="calibre1"><strong class="literal">spam</strong></span>
+['cat', 'aardvark', 'rat', 'elephant']
+&gt;&gt;&gt; <span class="calibre1"><strong class="literal">spam[2] = spam[1]</strong></span>
+&gt;&gt;&gt; <span class="calibre1"><strong class="literal">spam</strong></span>
+['cat', 'aardvark', 'aardvark', 'elephant']
+&gt;&gt;&gt; <span class="calibre1"><strong class="literal">spam[-1] = 12345</strong></span>
+&gt;&gt;&gt; <span class="calibre1"><strong class="literal">spam</strong></span>
+['cat', 'aardvark', 'aardvark', 12345]</pre>
+</div>
+<div class="book" title="List Concatenation and List Replication">
+<div class="titlepage">
+<div class="book">
+<div class="book">
+<h2 class="title3"><a id="calibre_link-2250" class="firstname"></a>List Concatenation and List Replication</h2>
+</div>
+</div>
+</div>
+<p class="calibre4">The <code class="literal1">+</code> operator can combine two lists to create a new list value in the same way it combines two strings into a new string value. The <code class="literal1">*</code> operator can also be used with a list and an integer value to replicate the list. Enter the following into the interactive shell:</p>
+<p><a id="calibre_link-2251" class="calibre1"></a>
+</p><pre class="programlisting">&gt;&gt;&gt; <span class="calibre1"><strong class="literal">[1, 2, 3] + ['A', 'B', 'C']</strong></span>
+[1, 2, 3, 'A', 'B', 'C']
+&gt;&gt;&gt; <span class="calibre1"><strong class="literal">['X', 'Y', 'Z'] * 3</strong></span>
+['X', 'Y', 'Z', 'X', 'Y', 'Z', 'X', 'Y', 'Z']
+&gt;&gt;&gt; <span class="calibre1"><strong class="literal">spam = [1, 2, 3]</strong></span>
+&gt;&gt;&gt; <span class="calibre1"><strong class="literal">spam = spam + ['A', 'B', 'C']</strong></span>
+&gt;&gt;&gt; spam
+[1, 2, 3, 'A', 'B', 'C']</pre>
+</div>
+<div class="book" title="Removing Values from Lists with del Statements">
+<div class="titlepage">
+<div class="book">
+<div class="book">
+<h2 class="title3"><a id="calibre_link-2252" class="firstname"></a>Removing Values from Lists with del Statements</h2>
+</div>
+</div>
+</div>
+<p class="calibre4"><a id="calibre_link-458" class="calibre1"></a><a id="calibre_link-867" class="calibre1"></a><a id="calibre_link-990" class="calibre1"></a><a id="calibre_link-991" class="calibre1"></a><a id="calibre_link-1150" class="calibre1"></a><a id="calibre_link-1790" class="calibre1"></a>The <code class="literal1">del</code> statement will delete values at an index in a list. All of the values in the list after the deleted value will be moved up one index. For example, enter the following into the interactive shell:</p>
+<p><a id="calibre_link-2253" class="calibre1"></a>
+</p><pre class="programlisting">&gt;&gt;&gt; <span class="calibre1"><strong class="literal">spam = ['cat', 'bat', 'rat', 'elephant']</strong></span>
+&gt;&gt;&gt; <span class="calibre1"><strong class="literal">del spam[2]</strong></span>
+&gt;&gt;&gt; <span class="calibre1"><strong class="literal">spam</strong></span>
+['cat', 'bat', 'elephant']
+&gt;&gt;&gt; <span class="calibre1"><strong class="literal">del spam[2]</strong></span>
+&gt;&gt;&gt; <span class="calibre1"><strong class="literal">spam</strong></span>
+['cat', 'bat']</pre>
+<p class="calibre4">The <code class="literal1">del</code> statement can also be used on a simple variable to delete it, as if it were an “unassignment” statement. If you try to use the variable after deleting it, you will get a <code class="literal1">NameError</code> error because the variable no longer exists.</p>
+<p class="calibre4">In practice, you almost never need to delete simple variables. The <code class="literal1">del</code> statement is mostly used to delete values from lists.</p>
+</div>
+</div>
+<div class="book" title="Working with Lists">
+<div class="titlepage">
+<div class="book">
+<div class="book">
+<h1 class="title2"><a id="calibre_link-2254" class="firstname"></a>Working with Lists</h1>
+</div>
+</div>
+</div>
+<p class="calibre4">When you first begin writing programs, it’s tempting to create many individual variables to store a group of similar values. For example, if I wanted to store the names of my cats, I might be tempted to write code like this:</p>
+<p><a id="calibre_link-2255" class="calibre1"></a>
+</p><pre class="programlisting">catName1 = 'Zophie'
+catName2 = 'Pooka'
+catName3 = 'Simon'
+catName4 = 'Lady Macbeth'
+catName5 = 'Fat-tail'
+catName6 = 'Miss Cleo'</pre>
+<p class="calibre4">(I don’t actually own this many cats, I swear.) It turns out that this is a bad way to write code. For one thing, if the number of cats changes, your program will never be able to store more cats than you have variables. These types of programs also have a lot of duplicate or nearly identical code in them. Consider how much duplicate code is in the following program, which you should enter into the file editor and save as <span class="calibre1"><em class="calibre5">allMyCats1.py</em></span>:</p>
+<p><a id="calibre_link-2256" class="calibre1"></a>
+</p><pre class="programlisting">print('Enter the name of cat 1:')
+catName1 = input()
+print('Enter the name of cat 2:')
+catName2 = input()
+print('Enter the name of cat 3:')
+catName3 = input()
+print('Enter the name of cat 4:')
+catName4 = input()
+print('Enter the name of cat 5:')
+catName5 = input()
+print('Enter the name of cat 6:')
+catName6 = input()
+print('The cat names are:')
+print(catName1 + ' ' + catName2 + ' ' + catName3 + ' ' + catName4 + ' ' +
+catName5 + ' ' + catName6)</pre>
+<p class="calibre4">Instead of using multiple, repetitive variables, you can use a single variable that contains a list value. For example, here’s a new and improved version of the <span class="calibre1"><em class="calibre5">allMyCats1.py</em></span> program. This new version uses a single list and can store any number of cats that the user types in. In a new file editor window, type the following source code and save it as <span class="calibre1"><em class="calibre5">allMyCats2.py</em></span>:</p>
+<p><a id="calibre_link-2257" class="calibre1"></a>
+</p><pre class="programlisting">catNames = []
+while True:
+    print('Enter the name of cat ' + str(len(catNames) + 1) +
+      ' (Or enter nothing to stop.):')
+    name = input()
+    if name == '':
+        break
+    catNames = catNames + [name] # list concatenation
+print('The cat names are:')
+for name in catNames:
+    print('  ' + name)</pre>
+<p class="calibre4">When you run this program, the output will look something like this:</p>
+<p><a id="calibre_link-2258" class="calibre1"></a>
+</p><pre class="programlisting">Enter the name of cat 1 (Or enter nothing to stop.):
+<span class="calibre1"><strong class="literal">Zophie</strong></span>
+Enter the name of cat 2 (Or enter nothing to stop.):
+<span class="calibre1"><strong class="literal">Pooka</strong></span>
+Enter the name of cat 3 (Or enter nothing to stop.):
+<span class="calibre1"><strong class="literal">Simon</strong></span>
+Enter the name of cat 4 (Or enter nothing to stop.):
+<span class="calibre1"><strong class="literal">Lady Macbeth</strong></span>
+Enter the name of cat 5 (Or enter nothing to stop.):
+<span class="calibre1"><strong class="literal">Fat-tail</strong></span>
+Enter the name of cat 6 (Or enter nothing to stop.):
+<span class="calibre1"><strong class="literal">Miss Cleo</strong></span>
+Enter the name of cat 7 (Or enter nothing to stop.):
+
+The cat names are:
+  Zophie
+  Pooka
+  Simon
+  Lady Macbeth
+  Fat-tail
+  Miss Cleo</pre>
+<p class="calibre4">The benefit of using a list is that your data is now in a structure, so your program is much more flexible in processing the data than it would be with several repetitive variables.</p>
+<div class="book" title="Using for Loops with Lists">
+<div class="titlepage">
+<div class="book">
+<div class="book">
+<h2 class="title3"><a id="calibre_link-2259" class="firstname"></a>Using for Loops with Lists</h2>
+</div>
+</div>
+</div>
+<p><a href="https://youtu.be/umTnflPbYww"><img src="./chapter4_files/youtubelogo.png"> Lesson 14 - for Loops with Lists, Multiple Assignment, Augmented Assignment Operators</a></p>
+<p class="calibre4"><a id="calibre_link-702" class="calibre1"></a><a id="calibre_link-992" class="calibre1"></a><a id="calibre_link-1038" class="calibre1"></a><a id="calibre_link-1569" class="calibre1"></a>In <a class="ulink" href="https://automatetheboringstuff.com/chapter2" title="Chapter 2. Flow Control">Chapter&nbsp;2</a>, you learned about using <code class="literal1">for</code> loops to execute a block of code a certain number of times. Technically, a <code class="literal1">for</code> loop repeats the code block once for each value in a list or list-like value. For example, if you ran this code:</p>
+<p><a id="calibre_link-2260" class="calibre1"></a>
+</p><pre class="programlisting">for i in range(4):
+    print(i)</pre>
+<p class="calibre4">the output of this program would be as follows:</p>
+<p><a id="calibre_link-2261" class="calibre1"></a>
+</p><pre class="programlisting">0
+1
+2
+3</pre>
+<p class="calibre4">This is because the return value from <code class="literal1">range(4)</code> is a list-like value that Python considers similar to <code class="literal1">[0, 1, 2, 3]</code>. The following program has the same output as the previous one:</p>
+<p><a id="calibre_link-2262" class="calibre1"></a>
+</p><pre class="programlisting">for i in [0, 1, 2, 3]:
+    print(i)</pre>
+<p class="calibre4">What the previous <code class="literal1">for</code> loop actually does is loop through its clause with the variable <code class="literal1">i</code> set to a successive value in the <code class="literal1">[0, 1, 2, 3]</code> list in each iteration.</p>
+<div class="note" title="Note">
+<h3 class="title5"><a id="calibre_link-2263" class="calibre1"></a>Note</h3>
+<p class="calibre4"><span class="calibre1"><em class="calibre5">In this book, I use the term</em></span> list-like <span class="calibre1"><em class="calibre5">to refer to data types that are technically named</em></span> sequences. <span class="calibre1"><em class="calibre5">You don’t need to know the technical definitions of this term, though</em></span>.</p>
+</div>
+<p class="calibre4">A common Python technique is to use <code class="literal1">range(len(</code><span class="calibre1"><em class="calibre5"><code class="literal3">someList</code></em></span><code class="literal1">))</code> with a <code class="literal1">for</code> loop to iterate over the indexes of a list. For example, enter the following into the interactive shell:</p>
+<p><a id="calibre_link-2264" class="calibre1"></a>
+</p><pre class="programlisting">&gt;&gt;&gt; <span class="calibre1"><strong class="literal">supplies = ['pens', 'staplers', 'flame-throwers', 'binders']</strong></span>
+&gt;&gt;&gt; <span class="calibre1"><strong class="literal">for i in range(len(supplies)):</strong></span>
+    <span class="calibre1"><strong class="literal">print('Index ' + str(i) + ' in supplies is: ' + supplies[i])</strong></span>
+
+Index 0 in supplies is: pens
+Index 1 in supplies is: staplers
+Index 2 in supplies is: flame-throwers
+Index 3 in supplies is: binders</pre>
+<p class="calibre4">Using <code class="literal1">range(len(supplies))</code> in the previously shown <code class="literal1">for</code> loop is handy because the code in the loop can access the index (as the variable <code class="literal1">i</code>) and the value at that index (as <code class="literal1">supplies[i]</code>). Best of all, <code class="literal1">range(len(supplies))</code> will iterate through all the indexes of <code class="literal1">supplies</code>, no matter how many items it contains.</p>
+</div>
+<div class="book" title="The in and not in Operators">
+<div class="titlepage">
+<div class="book">
+<div class="book">
+<h2 class="title3"><a id="calibre_link-2265" class="firstname"></a>The in and not in Operators</h2>
+</div>
+</div>
+</div>
+<p class="calibre4"><a id="calibre_link-281" class="calibre1"></a><a id="calibre_link-282" class="calibre1"></a><a id="calibre_link-876" class="calibre1"></a><a id="calibre_link-993" class="calibre1"></a><a id="calibre_link-994" class="calibre1"></a><a id="calibre_link-995" class="calibre1"></a><a id="calibre_link-1134" class="calibre1"></a><a id="calibre_link-1160" class="calibre1"></a>You can determine whether a value is or isn’t in a list with the <code class="literal1">in</code> and <code class="literal1">not in</code> operators. Like other operators, <code class="literal1">in</code> and <code class="literal1">not in</code> are used in expressions and connect two values: a value to look for in a list and the list where it may be found. These expressions will evaluate to a Boolean value. Enter the following into the interactive shell:</p>
+<p><a id="calibre_link-2266" class="calibre1"></a>
+</p><pre class="programlisting">&gt;&gt;&gt; <span class="calibre1"><strong class="literal">'howdy' in ['hello', 'hi', 'howdy', 'heyas']</strong></span>
+True
+&gt;&gt;&gt; <span class="calibre1"><strong class="literal">spam = ['hello', 'hi', 'howdy', 'heyas']</strong></span>
+&gt;&gt;&gt; <span class="calibre1"><strong class="literal">'cat' in spam</strong></span>
+False
+&gt;&gt;&gt; <span class="calibre1"><strong class="literal">'howdy' not in spam</strong></span>
+False
+&gt;&gt;&gt; <span class="calibre1"><strong class="literal">'cat' not in spam</strong></span>
+True</pre>
+<p class="calibre4">For example, the following program lets the user type in a pet name and then checks to see whether the name is in a list of pets. Open a new file editor window, enter the following code, and save it as <span class="calibre1"><em class="calibre5">myPets.py</em></span>:</p>
+<p><a id="calibre_link-2267" class="calibre1"></a>
+</p><pre class="programlisting">myPets = ['Zophie', 'Pooka', 'Fat-tail']
+print('Enter a pet name:')
+name = input()
+if name not in myPets:
+    print('I do not have a pet named ' + name)
+else:
+    print(name + ' is my pet.')</pre>
+<p class="calibre4">The output may look something like this:</p>
+<p><a id="calibre_link-2268" class="calibre1"></a>
+</p><pre class="programlisting">Enter a pet name:
+<span class="calibre1"><strong class="literal">Footfoot</strong></span>
+I do not have a pet named Footfoot</pre>
+</div>
+<div class="book" title="The Multiple Assignment Trick">
+<div class="titlepage">
+<div class="book">
+<div class="book">
+<h2 class="title3"><a id="calibre_link-2269" class="firstname"></a>The Multiple Assignment Trick</h2>
+</div>
+</div>
+</div>
+<p class="calibre4">The <span class="calibre1"><em class="calibre5">multiple assignment trick</em></span> is a shortcut that lets you assign multiple variables with the values in a list in one line of code. So instead of doing this:</p>
+<p><a id="calibre_link-2270" class="calibre1"></a>
+</p><pre class="programlisting">&gt;&gt;&gt; <span class="calibre1"><strong class="literal">cat = ['fat', 'orange', 'loud']</strong></span>
+&gt;&gt;&gt; <span class="calibre1"><strong class="literal">size = cat[0]</strong></span>
+&gt;&gt;&gt; <span class="calibre1"><strong class="literal">color = cat[1]</strong></span>
+&gt;&gt;&gt; <span class="calibre1"><strong class="literal">disposition = cat[2]</strong></span></pre>
+<p class="calibre4">you could type this line of code:</p>
+<p><a id="calibre_link-2271" class="calibre1"></a>
+</p><pre class="programlisting">&gt;&gt;&gt; <span class="calibre1"><strong class="literal">cat = ['fat', 'orange', 'loud']</strong></span>
+&gt;&gt;&gt; <span class="calibre1"><strong class="literal">size, color, disposition = cat</strong></span></pre>
+<p class="calibre4"><a id="calibre_link-163" class="calibre1"></a><a id="calibre_link-177" class="calibre1"></a><a id="calibre_link-180" class="calibre1"></a><a id="calibre_link-189" class="calibre1"></a><a id="calibre_link-201" class="calibre1"></a><a id="calibre_link-224" class="calibre1"></a><a id="calibre_link-253" class="calibre1"></a><a id="calibre_link-491" class="calibre1"></a><a id="calibre_link-996" class="calibre1"></a><a id="calibre_link-1098" class="calibre1"></a><a id="calibre_link-1137" class="calibre1"></a><a id="calibre_link-1182" class="calibre1"></a><a id="calibre_link-1480" class="calibre1"></a><a id="calibre_link-1689" class="calibre1"></a><a id="calibre_link-1777" class="calibre1"></a>The number of variables and the length of the list must be exactly equal, or Python will give you a <code class="literal1">ValueError</code>:</p>
+<p><a id="calibre_link-2272" class="calibre1"></a>
+</p><pre class="programlisting">&gt;&gt;&gt; <span class="calibre1"><strong class="literal">cat = ['fat', 'orange', 'loud']</strong></span>
+&gt;&gt;&gt; <span class="calibre1"><strong class="literal">size, color, disposition, name = cat</strong></span>
+Traceback (most recent call last):
+  File "&lt;pyshell#84&gt;", line 1, in &lt;module&gt;
+    size, color, disposition, name = cat
+ValueError: need more than 3 values to unpack</pre>
+<p>The multiple assignment trick can also be used to swap the values in two variables:</p>
+<pre class="programlisting">&gt;&gt;&gt; <span class="calibre1"><strong class="literal">a, b = 'Alice', 'Bob'</strong></span>
+&gt;&gt;&gt; <span class="calibre1"><strong class="literal">a, b = b, a</strong></span>
+&gt;&gt;&gt; <span class="calibre1"><strong class="literal">print(a)</strong></span>
+'Bob'
+&gt;&gt;&gt; <span class="calibre1"><strong class="literal">print(b)</strong></span>
+'Alice'</pre>
+</div>
+</div>
+<div class="book" title="Augmented Assignment Operators">
+<div class="titlepage">
+<div class="book">
+<div class="book">
+<h1 class="title2"><a id="calibre_link-2273" class="firstname"></a>Augmented Assignment Operators</h1>
+</div>
+</div>
+</div>
+<p class="calibre4">When assigning a value to a variable, you will frequently use the variable itself. For example, after assigning <code class="literal1">42</code> to the variable <code class="literal1">spam</code>, you would increase the value in <code class="literal1">spam</code> by <code class="literal1">1</code> with the following code:</p>
+<p><a id="calibre_link-2274" class="calibre1"></a>
+</p><pre class="programlisting">&gt;&gt;&gt; <span class="calibre1"><strong class="literal">spam = 42</strong></span>
+&gt;&gt;&gt; <span class="calibre1"><strong class="literal">spam = spam + 1</strong></span>
+&gt;&gt;&gt; <span class="calibre1"><strong class="literal">spam</strong></span>
+43</pre>
+<p class="calibre4">As a shortcut, you can use the augmented assignment operator <code class="literal1">+=</code> to do the same thing:</p>
+<p><a id="calibre_link-2275" class="calibre1"></a>
+</p><pre class="programlisting">&gt;&gt;&gt; <span class="calibre1"><strong class="literal">spam = 42</strong></span>
+&gt;&gt;&gt; <span class="calibre1"><strong class="literal">spam += 1</strong></span>
+&gt;&gt;&gt; <span class="calibre1"><strong class="literal">spam</strong></span>
+43</pre>
+<p class="calibre4">There are augmented assignment operators for the <code class="literal1">+</code>, <code class="literal1">-</code>, <code class="literal1">*</code>, <code class="literal1">/</code>, and <code class="literal1">%</code> operators, described in <a class="ulink" href="https://automatetheboringstuff.com/chapter4/#calibre_link-124" title="Table 4-1. The Augmented Assignment Operators">Table&nbsp;4-1</a>.</p>
+<div class="table"><a id="calibre_link-124" class="calibre1"></a>
+<p class="title7">Table&nbsp;4-1.&nbsp;The Augmented Assignment Operators</p>
+<div class="book">
+<table summary="The Augmented Assignment Operators" class="calibre9">
+<colgroup class="calibre10">
+<col class="calibre11">
+<col class="calibre11">
+</colgroup>
+<thead class="calibre12">
+<tr class="calibre13">
+<th valign="top" class="calibre14">
+<p class="calibre4">Augmented assignment statement</p>
+</th>
+<th valign="top" class="calibre15">
+<p class="calibre4">Equivalent assignment statement</p>
+</th>
+</tr>
+</thead>
+<tbody class="calibre16">
+<tr class="calibre13">
+<td valign="top" class="calibre17">
+<p class="calibre4"><code class="literal2">spam += 1</code></p>
+</td>
+<td valign="top" class="calibre18">
+<p class="calibre4"><code class="literal2">spam = spam + 1</code></p>
+</td>
+</tr>
+<tr class="calibre19">
+<td valign="top" class="calibre17">
+<p class="calibre4"><code class="literal2">spam -= 1</code></p>
+</td>
+<td valign="top" class="calibre18">
+<p class="calibre4"><code class="literal2">spam = spam - 1</code></p>
+</td>
+</tr>
+<tr class="calibre13">
+<td valign="top" class="calibre17">
+<p class="calibre4"><code class="literal2">spam *= 1</code></p>
+</td>
+<td valign="top" class="calibre18">
+<p class="calibre4"><code class="literal2">spam = spam * 1</code></p>
+</td>
+</tr>
+<tr class="calibre19">
+<td valign="top" class="calibre17">
+<p class="calibre4"><code class="literal2">spam /= 1</code></p>
+</td>
+<td valign="top" class="calibre18">
+<p class="calibre4"><code class="literal2">spam = spam / 1</code></p>
+</td>
+</tr>
+<tr class="calibre13">
+<td valign="top" class="calibre20">
+<p class="calibre4"><code class="literal2">spam %= 1</code></p>
+</td>
+<td valign="top" class="calibre21">
+<p class="calibre4"><code class="literal2">spam = spam % 1</code></p>
+</td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+<p class="calibre4">The <code class="literal1">+=</code> operator can also do string and list concatenation, and the <code class="literal1">*=</code> operator can do string and list replication. Enter the following into the interactive shell:</p>
+<p><a id="calibre_link-2276" class="calibre1"></a>
+</p><pre class="programlisting">&gt;&gt;&gt; <span class="calibre1"><strong class="literal">spam = 'Hello'</strong></span>
+&gt;&gt;&gt; <span class="calibre1"><strong class="literal">spam += ' world!'</strong></span>
+&gt;&gt;&gt; <span class="calibre1"><strong class="literal">spam</strong></span>
+'Hello world!'</pre>
+<p><a id="calibre_link-2277" class="calibre1"></a>
+</p><pre class="programlisting">&gt;&gt;&gt; <span class="calibre1"><strong class="literal">bacon = ['Zophie']</strong></span>
+&gt;&gt;&gt; <span class="calibre1"><strong class="literal">bacon *= 3</strong></span>
+&gt;&gt;&gt; <span class="calibre1"><strong class="literal">bacon</strong></span>
+['Zophie', 'Zophie', 'Zophie']</pre>
+</div>
+<div class="book" title="Methods">
+<div class="titlepage">
+<div class="book">
+<div class="book">
+<h1 class="title2"><a id="calibre_link-2278" class="firstname"></a>Methods</h1>
+</div>
+</div>
+</div>
+<p><a href="https://youtu.be/Z9IxxW7428A"><img src="./chapter4_files/youtubelogo.png"> Lesson 15 - Methods and the index(), append(), insert(), remove(), sort() List Methods</a></p>
+<p class="calibre4"><a id="calibre_link-238" class="calibre1"></a><a id="calibre_link-871" class="calibre1"></a><a id="calibre_link-880" class="calibre1"></a><a id="calibre_link-997" class="calibre1"></a><a id="calibre_link-998" class="calibre1"></a><a id="calibre_link-999" class="calibre1"></a><a id="calibre_link-1059" class="calibre1"></a><a id="calibre_link-1060" class="calibre1"></a><a id="calibre_link-1061" class="calibre1"></a><a id="calibre_link-1062" class="calibre1"></a><a id="calibre_link-1791" class="calibre1"></a>A <span class="calibre1"><em class="calibre5">method</em></span> is the same thing as a function, except it is “called on” a value. For example, if a list value were stored in <code class="literal1">spam</code>, you would call the <code class="literal1">index()</code> list method (which I’ll explain next) on that list like so: <code class="literal1">spam.index('hello')</code>. The method part comes after the value, separated by a period.</p>
+<p class="calibre4">Each data type has its own set of methods. The list data type, for example, has several useful methods for finding, adding, removing, and otherwise manipulating values in a list.</p>
+<div class="book" title="Finding a Value in a List with the index() Method">
+<div class="titlepage">
+<div class="book">
+<div class="book">
+<h2 class="title3"><a id="calibre_link-2279" class="firstname"></a>Finding a Value in a List with the index() Method</h2>
+</div>
+</div>
+</div>
+<p class="calibre4">List values have an <code class="literal1">index()</code> method that can be passed a value, and if that value exists in the list, the index of the value is returned. If the value isn’t in the list, then Python produces a <code class="literal1">ValueError</code> error. Enter the following into the interactive shell:</p>
+<p><a id="calibre_link-2280" class="calibre1"></a>
+</p><pre class="programlisting">&gt;&gt;&gt; <span class="calibre1"><strong class="literal">spam = ['hello', 'hi', 'howdy', 'heyas']</strong></span>
+&gt;&gt;&gt; <span class="calibre1"><strong class="literal">spam.index('hello')</strong></span>
+0
+&gt;&gt;&gt; <span class="calibre1"><strong class="literal">spam.index('heyas')</strong></span>
+3
+&gt;&gt;&gt; <span class="calibre1"><strong class="literal">spam.index('howdy howdy howdy')</strong></span>
+Traceback (most recent call last):
+  File "&lt;pyshell#31&gt;", line 1, in &lt;module&gt;
+    spam.index('howdy howdy howdy')
+ValueError: 'howdy howdy howdy' is not in list</pre>
+<p class="calibre4">When there are duplicates of the value in the list, the index of its first appearance is returned. Enter the following into the interactive shell, and notice that <code class="literal1">index()</code> returns <code class="literal1">1</code>, not <code class="literal1">3</code>:</p>
+<p><a id="calibre_link-2281" class="calibre1"></a>
+</p><pre class="programlisting">&gt;&gt;&gt; <span class="calibre1"><strong class="literal">spam = ['Zophie', 'Pooka', 'Fat-tail', 'Pooka']</strong></span>
+&gt;&gt;&gt; <span class="calibre1"><strong class="literal">spam.index('Pooka')</strong></span>
+1</pre>
+</div>
+<div class="book" title="Adding Values to Lists with the append() and insert() Methods">
+<div class="titlepage">
+<div class="book">
+<div class="book">
+<h2 class="title3"><a id="calibre_link-2282" class="firstname"></a>Adding Values to Lists with the append() and insert() Methods</h2>
+</div>
+</div>
+</div>
+<p class="calibre4">To add new values to a list, use the <code class="literal1">append()</code> and <code class="literal1">insert()</code> methods. Enter the following into the interactive shell to call the <code class="literal1">append()</code> method on a list value stored in the variable <code class="literal1">spam</code>:</p>
+<p><a id="calibre_link-2283" class="calibre1"></a>
+</p><pre class="programlisting">&gt;&gt;&gt; <span class="calibre1"><strong class="literal">spam = ['cat', 'dog', 'bat']</strong></span>
+&gt;&gt;&gt; <span class="calibre1"><strong class="literal">spam.append('moose')</strong></span>
+&gt;&gt;&gt; <span class="calibre1"><strong class="literal">spam</strong></span>
+['cat', 'dog', 'bat', 'moose']</pre>
+<p class="calibre4"><a id="calibre_link-1000" class="calibre1"></a><a id="calibre_link-1063" class="calibre1"></a><a id="calibre_link-1481" class="calibre1"></a>The previous <code class="literal1">append()</code> method call adds the argument to the end of the list. The <code class="literal1">insert()</code> method can insert a value at any index in the list. The first argument to <code class="literal1">insert()</code> is the index for the new value, and the second argument is the new value to be inserted. Enter the following into the interactive shell:</p>
+<p><a id="calibre_link-2284" class="calibre1"></a>
+</p><pre class="programlisting">&gt;&gt;&gt; <span class="calibre1"><strong class="literal">spam = ['cat', 'dog', 'bat']</strong></span>
+&gt;&gt;&gt; <span class="calibre1"><strong class="literal">spam.insert(1, 'chicken'</strong></span>)
+&gt;&gt;&gt; <span class="calibre1"><strong class="literal">spam</strong></span>
+['cat', 'chicken', 'dog', 'bat']</pre>
+<p class="calibre4">Notice that the code is <code class="literal1">spam.append('moose')</code> and <code class="literal1">spam.insert(1, 'chicken')</code>, not <code class="literal1">spam = spam.append('moose')</code> and <code class="literal1">spam = spam.insert(1, 'chick</code></p></div></div></div></div></div></article></div></body></html>

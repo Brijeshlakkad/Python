@@ -1,0 +1,262 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<!-- saved from url=(0044)https://automatetheboringstuff.com/chapter7/ -->
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml" xml:lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+  <link rel="stylesheet" type="text/css" href="./chapter7_files/automate_website.css">
+  
+  <title>Automate the Boring Stuff with Python</title>
+</head>
+
+<body>
+  <div class="top_header">
+  <a href="https://automatetheboringstuff.com/">Home</a> | <a href="https://www.nostarch.com/automatestuff">Buy on No Starch Press</a> | <a href="http://www.amazon.com/gp/product/1593275994/ref=as_li_tl?ie=UTF8&amp;camp=1789&amp;creative=9325&amp;creativeASIN=1593275994&amp;linkCode=as2&amp;tag=playwithpyth-20&amp;linkId=HDM7V3T6RHC5VVN4">Buy on Amazon</a> | <a href="https://twitter.com/AlSweigart">@AlSweigart</a> | <form action="https://www.paypal.com/cgi-bin/webscr" method="post">
+            <input type="hidden" name="cmd" value="_s-xclick"> <input type="hidden" name="encrypted" value="-----BEGIN PKCS7-----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-----END PKCS7----- "> <input type="image" src="./chapter7_files/btn_donate_LG.gif" border="0" name="submit" alt="PayPal - The safer, easier way to pay online!"> <img alt="" border="0" src="./chapter7_files/pixel.gif" width="1" height="1" hidden="" style="display: none !important;">
+          </form></div>
+
+  <div class="main">
+	
+				
+<article id="post-116" class="post-116 page type-page status-publish hentry">
+	<header class="entry-header">
+		<h1 class="entry-title">Chapter  7 – Pattern Matching with Regular Expressions</h1>	</header><!-- .entry-header -->
+
+	<div class="entry-content">
+		<p></p><center><a href="https://automatetheboringstuff.com/chapter6"><img src="./chapter7_files/prev.png"></a><a href="https://automatetheboringstuff.com/#toc"><img src="./chapter7_files/toc.png"></a><a href="https://automatetheboringstuff.com/chapter8"><img src="./chapter7_files/next.png"></a><br>Support the Author: Buy the book on <a href="http://www.amazon.com/gp/product/1593275994/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&amp;camp=1789&amp;creative=9325&amp;creativeASIN=1593275994&amp;linkCode=as2&amp;tag=playwithpyth-20&amp;linkId=2KIYOE7RFLG7D2RJ">Amazon</a> or<br><a href="http://www.nostarch.com/automatestuff">the book/ebook bundle directly from No Starch Press</a>.<br><a href="http://www.nostarch.com/automatestuff"><img class=" size-full wp-image-49 aligncenter" src="./chapter7_files/automate_small_cover.png" alt="small_cover" width="170" height="225"></a><br><a href="https://inventwithpython.com/">Read the author's other free Python books:</a><br><a href="https://inventwithpython.com/chapters"><img src="./chapter7_files/smallcover_invent.png" width="120"></a> <a href="https://inventwithpython.com/pygame/chapters"><img src="./chapter7_files/smallcover_makinggames.png" width="120"></a> <a href="https://inventwithpython.com/hacking/chapters"><img src="./chapter7_files/smallcover_hacking.png" width="120"></a></center><p></p>
+<div class="calibre" id="calibre_link-58">
+<div class="book" title="Chapter 7. Pattern Matching with Regular Expressions">
+<div class="titlepage">
+<div class="book">
+<div class="book">
+<h1 class="title1"><a id="calibre_link-2546" class="firstname"></a>Pattern Matching with Regular Expressions</h1>
+</div>
+</div>
+</div>
+<p><a href="https://youtu.be/ruRYJiV2hI0"><img src="./chapter7_files/youtubelogo.png"> Lesson 23 - Regular Expressions Introduction</a></p>
+<p class="calibre4"><a id="calibre_link-1451" class="calibre1"></a>You may be familiar with searching for text by pressing <span class="smaller">CTRL</span>-F and typing in the words you’re looking for. <span class="calibre1"><em class="calibre5">Regular expressions</em></span> go one step further: They allow you to specify a <span class="calibre1"><em class="calibre5">pattern</em></span> of text to search for. You may not know a business’s exact phone number, but if you live in the United States or Canada, you know it will be three digits, followed by a hyphen, and then four more digits (and optionally, a three-digit area code at the start). This is how you, as a human, know a phone number when you see it: 415-555-1234 is a phone number, but 4,155,551,234 is not.</p>
+<p class="calibre4">Regular expressions are helpful, but not many non-programmers know about them even though most modern text editors and word processors, such as Microsoft Word or OpenOffice, have find and find-and-replace features that can search based on regular expressions. Regular expressions are huge time-savers, not just for software users but also for <a id="calibre_link-1452" class="calibre1"></a>programmers. In fact, tech writer Cory Doctorow argues that even before teaching programming, we should be teaching regular expressions:</p>
+<div class="blockquote">
+<blockquote class="blockquote1">
+<p class="calibre3">“Knowing [regular expressions] can mean the difference between solving a problem in 3 steps and solving it in 3,000 steps. When you’re a nerd, you forget that the problems you solve with a couple keystrokes can take other people days of tedious, error-prone work to slog through.”<sup class="calibre24">[<a id="calibre_link-62" href="https://automatetheboringstuff.com/chapter7/#calibre_link-59" class="firstname">1</a>]</sup></p>
+</blockquote>
+</div>
+<p class="calibre4">In this chapter, you’ll start by writing a program to find text patterns <span class="calibre1"><em class="calibre5">without</em></span> using regular expressions and then see how to use regular expressions to make the code much less bloated. I’ll show you basic matching with regular expressions and then move on to some more powerful features, such as string substitution and creating your own character classes. Finally, at the end of the chapter, you’ll write a program that can automatically extract phone numbers and email addresses from a block of text.</p>
+<div class="book" title="Finding Patterns of Text Without Regular Expressions">
+<div class="titlepage">
+<div class="book">
+<div class="book">
+<h1 class="title2"><a id="calibre_link-2547" class="firstname"></a>Finding Patterns of Text Without Regular Expressions</h1>
+</div>
+</div>
+</div>
+<p class="calibre4">Say you want to find a phone number in a string. You know the pattern: three numbers, a hyphen, three numbers, a hyphen, and four numbers. Here’s an example: 415-555-4242.</p>
+<p class="calibre4">Let’s use a function named <code class="literal1">isPhoneNumber()</code> to check whether a string matches this pattern, returning either <code class="literal1">True</code> or <code class="literal1">False</code>. Open a new file editor window and enter the following code; then save the file as <span class="calibre1"><em class="calibre5">isPhoneNumber.py</em></span>:</p>
+<p><a id="calibre_link-2548" class="calibre1"></a>
+</p><pre class="programlisting">   def isPhoneNumber(text):
+❶     if len(text) != 12:
+           return False
+       for i in range(0, 3):
+❷         if not text[i].isdecimal():
+               return False
+❸     if text[3] != '-':
+           return False
+       for i in range(4, 7):
+❹         if not text[i].isdecimal():
+               return False
+❺     if text[7] != '-':
+           return False
+       for i in range(8, 12):
+❻         if not text[i].isdecimal():
+               return False
+❼     return True
+
+   print('415-555-4242 is a phone number:')
+   print(isPhoneNumber('415-555-4242'))
+   print('Moshi moshi is a phone number:')
+   print(isPhoneNumber('Moshi moshi'))</pre>
+<p class="calibre4">When this program is run, the output looks like this:</p>
+<p><a id="calibre_link-2549" class="calibre1"></a>
+</p><pre class="programlisting">415-555-4242 is a phone number:
+True
+Moshi moshi is a phone number:
+False</pre>
+<p class="calibre4">The <code class="literal1">isPhoneNumber()</code> function has code that does several checks to see whether the string in <code class="literal1">text</code> is a valid phone number. If any of these checks fail, the function returns <code class="literal1">False</code>. First the code checks that the string is exactly 12 characters ❶. Then it checks that the area code (that is, the first three characters in <code class="literal1">text</code>) consists of only numeric characters ❷. The rest of the function checks that the string follows the pattern of a phone number: The number must have the first hyphen after the area code ❸, three more numeric characters ❹, then another hyphen ❺, and finally four more numbers ❻. If the program execution manages to get past all the checks, it returns <code class="literal1">True</code> ❼.</p>
+<p class="calibre4">Calling <code class="literal1">isPhoneNumber()</code> with the argument <code class="literal1">'415-555-4242'</code> will return <code class="literal1">True</code>. Calling <code class="literal1">isPhoneNumber()</code> with <code class="literal1">'Moshi moshi'</code> will return <code class="literal1">False</code>; the first test fails because <code class="literal1">'Moshi moshi'</code> is not 12 characters long.</p>
+<p class="calibre4">You would have to add even more code to find this pattern of text in a larger string. Replace the last four <code class="literal1">print()</code> function calls in <span class="calibre1"><em class="calibre5">isPhoneNumber.py</em></span> with the following:</p>
+<p><a id="calibre_link-2550" class="calibre1"></a>
+</p><pre class="programlisting">   message = 'Call me at 415-555-1011 tomorrow. 415-555-9999 is my office.'
+   for i in range(len(message)):
+❶     chunk = message[i:i+12]
+❷     if isPhoneNumber(chunk):
+         print('Phone number found: ' + chunk)
+   print('Done')</pre>
+<p class="calibre4">When this program is run, the output will look like this:</p>
+<p><a id="calibre_link-2551" class="calibre1"></a>
+</p><pre class="programlisting">Phone number found: 415-555-1011
+Phone number found: 415-555-9999
+Done</pre>
+<p class="calibre4">On each iteration of the <code class="literal1">for</code> loop, a new chunk of 12 characters from <code class="literal1">message</code> is assigned to the variable <code class="literal1">chunk</code> ❶. For example, on the first iteration, <code class="literal1">i</code> is <code class="literal1">0</code>, and <code class="literal1">chunk</code> is assigned <code class="literal1">message[0:12]</code> (that is, the string <code class="literal1">'Call me at 4'</code>). On the next iteration, <code class="literal1">i</code> is <code class="literal1">1</code>, and <code class="literal1">chunk</code> is assigned <code class="literal1">message[1:13]</code> (the string <code class="literal1">'all me at 41'</code>).</p>
+<p class="calibre4">You pass <code class="literal1">chunk</code> to <code class="literal1">isPhoneNumber()</code> to see whether it matches the phone number pattern ❷, and if so, you print the chunk.</p>
+<p class="calibre4">Continue to loop through <code class="literal1">message</code>, and eventually the 12 characters in <code class="literal1">chunk</code> will be a phone number. The loop goes through the entire string, testing each 12-character piece and printing any <code class="literal1">chunk</code> it finds that satisfies <code class="literal1">isPhoneNumber()</code>. Once we’re done going through <code class="literal1">message</code>, we print <code class="literal1">Done</code>.</p>
+<p class="calibre4"><a id="calibre_link-1449" class="calibre1"></a><a id="calibre_link-1453" class="calibre1"></a><a id="calibre_link-1454" class="calibre1"></a><a id="calibre_link-1780" class="calibre1"></a>While the string in <code class="literal1">message</code> is short in this example, it could be millions of characters long and the program would still run in less than a second. A similar program that finds phone numbers using regular expressions would also run in less than a second, but regular expressions make it quicker to write these programs.</p>
+</div>
+<div class="book" title="Finding Patterns of Text with Regular Expressions">
+<div class="titlepage">
+<div class="book">
+<div class="book">
+<h1 class="title2"><a id="calibre_link-2552" class="firstname"></a>Finding Patterns of Text with Regular Expressions</h1>
+</div>
+</div>
+</div>
+<p class="calibre4">The previous phone number–finding program works, but it uses a lot of code to do something limited: The <code class="literal1">isPhoneNumber()</code> function is 17 lines but can find only one pattern of phone numbers. What about a phone number formatted like 415.555.4242 or (415) 555-4242? What if the phone number had an extension, like 415-555-4242 x99? The <code class="literal1">isPhoneNumber()</code> function would fail to validate them. You could add yet more code for these additional patterns, but there is an easier way.</p>
+<p class="calibre4">Regular expressions, called <span class="calibre1"><em class="calibre5">regexes</em></span> for short, are descriptions for a pattern of text. For example, a <code class="literal1">\d</code> in a regex stands for a digit character—that is, any single numeral 0 to 9. The regex <code class="literal1">\d\d\d-\d\d\d-\d\d\d\d</code> is used by Python to match the same text the previous <code class="literal1">isPhoneNumber()</code> function did: a string of three numbers, a hyphen, three more numbers, another hyphen, and four numbers. Any other string would not match the <code class="literal1">\d\d\d-\d\d\d-\d\d \d\d</code> regex.</p>
+<p class="calibre4">But regular expressions can be much more sophisticated. For example, adding a <code class="literal1">3</code> in curly brackets (<code class="literal1">{3}</code>) after a pattern is like saying, “Match this pattern three times.” So the slightly shorter regex <code class="literal1">\d{3}-\d{3}-\d{4}</code> also matches the correct phone number format.</p>
+<div class="book" title="Creating Regex Objects">
+<div class="titlepage">
+<div class="book">
+<div class="book">
+<h2 class="title3"><a id="calibre_link-2553" class="firstname"></a>Creating Regex Objects</h2>
+</div>
+</div>
+</div>
+<p class="calibre4">All the regex functions in Python are in the <code class="literal1">re</code> module. Enter the following into the interactive shell to import this module:</p>
+<p><a id="calibre_link-2554" class="calibre1"></a>
+</p><pre class="programlisting">&gt;&gt;&gt; <span class="calibre1"><strong class="literal">import re</strong></span></pre>
+<div class="note" title="Note">
+<h3 class="title5"><a id="calibre_link-2555" class="calibre1"></a>Note</h3>
+<p class="calibre4"><span class="calibre1"><em class="calibre5">Most of the examples that follow in this chapter will require the <code class="literal3">re</code> module, so remember to import it at the beginning of any script you write or any time you restart IDLE. Otherwise, you’ll get a <code class="literal3">NameError: name 're' is not defined</code> error message.</em></span></p>
+</div>
+<p class="calibre4">Passing a string value representing your regular expression to <code class="literal1">re.compile()</code> returns a <code class="literal1">Regex</code> pattern object (or simply, a <code class="literal1">Regex</code> object).</p>
+<p class="calibre4">To create a <code class="literal1">Regex</code> object that matches the phone number pattern, enter the following into the interactive shell. (Remember that <code class="literal1">\d</code> means “a digit character” and <code class="literal1">\d\d\d-\d\d\d-\d\d\d\d</code> is the regular expression for the correct phone number pattern.)</p>
+<p><a id="calibre_link-2556" class="calibre1"></a>
+</p><pre class="programlisting">&gt;&gt;&gt; <span class="calibre1"><strong class="literal">phoneNumRegex = re.compile(r'\d\d\d-\d\d\d-\d\d\d\d')</strong></span></pre>
+<p class="calibre4"><a id="calibre_link-167" class="calibre1"></a><a id="calibre_link-259" class="calibre1"></a><a id="calibre_link-350" class="calibre1"></a><a id="calibre_link-766" class="calibre1"></a><a id="calibre_link-1054" class="calibre1"></a><a id="calibre_link-1437" class="calibre1"></a><a id="calibre_link-1450" class="calibre1"></a><a id="calibre_link-1455" class="calibre1"></a><a id="calibre_link-1544" class="calibre1"></a>Now the <code class="literal1">phoneNumRegex</code> variable contains a <code class="literal1">Regex</code> object.</p>
+<div class="sidebar"><a id="calibre_link-2557" class="calibre1"></a>
+<p class="title5">Passing Raw Strings to re.compile( )</p>
+<p class="calibre4">Remember that escape characters in Python use the backslash (\). The string value <code class="literal1">'\n'</code> represents a single newline character, not a backslash followed by a lowercase <span class="calibre1"><em class="calibre5">n</em></span>. You need to enter the escape character <code class="literal1">\\</code> to print a single backslash. So <code class="literal1">'\\n'</code> is the string that represents a backslash followed by a lowercase <span class="calibre1"><em class="calibre5">n</em></span>. However, by putting an <code class="literal1">r</code> before the first quote of the string value, you can mark the string as a <span class="calibre1"><em class="calibre5">raw string</em></span>, which does not escape characters.</p>
+<p class="calibre4">Since regular expressions frequently use backslashes in them, it is convenient to pass raw strings to the <code class="literal1">re.compile()</code> function instead of typing extra backslashes. Typing <code class="literal1">r'\d\d\d-\d\d\d-\d\d\d\d'</code> is much easier than typing <code class="literal1">'\\d\\d\\d-\\d\\d\\d-\\d\\d\\d\\d'</code>.</p>
+</div>
+</div>
+<div class="book" title="Matching Regex Objects">
+<div class="titlepage">
+<div class="book">
+<div class="book">
+<h2 class="title3"><a id="calibre_link-2558" class="firstname"></a>Matching Regex Objects</h2>
+</div>
+</div>
+</div>
+<p class="calibre4">A <code class="literal1">Regex</code> object’s <code class="literal1">search()</code> method searches the string it is passed for any matches to the regex. The <code class="literal1">search()</code> method will return <code class="literal1">None</code> if the regex pattern is not found in the string. If the pattern <span class="calibre1"><em class="calibre5">is</em></span> found, the <code class="literal1">search()</code> method returns a <code class="literal1">Match</code> object. <code class="literal1">Match</code> objects have a <code class="literal1">group()</code> method that will return the actual matched text from the searched string. (I’ll explain groups shortly.) For example, enter the following into the interactive shell:</p>
+<p><a id="calibre_link-2559" class="calibre1"></a>
+</p><pre class="programlisting">&gt;&gt;&gt; <span class="calibre1"><strong class="literal">phoneNumRegex = re.compile(r'\d\d\d-\d\d\d-\d\d\d\d')</strong></span>
+&gt;&gt;&gt; <span class="calibre1"><strong class="literal">mo = phoneNumRegex.search('My number is 415-555-4242.')</strong></span>
+&gt;&gt;&gt; <span class="calibre1"><strong class="literal">print('Phone number found: ' + mo.group())</strong></span>
+Phone number found: 415-555-4242</pre>
+<p class="calibre4">The <code class="literal1">mo</code> variable name is just a generic name to use for <code class="literal1">Match</code> objects. This example might seem complicated at first, but it is much shorter than the earlier <span class="calibre1"><em class="calibre5">isPhoneNumber.py</em></span> program and does the same thing.</p>
+<p class="calibre4">Here, we pass our desired pattern to <code class="literal1">re.compile()</code> and store the resulting <code class="literal1">Regex</code> object in <code class="literal1">phoneNumRegex</code>. Then we call <code class="literal1">search()</code> on <code class="literal1">phoneNumRegex</code> and pass <code class="literal1">search()</code> the string we want to search for a match. The result of the search gets stored in the variable <code class="literal1">mo</code>. In this example, we know that our pattern will be found in the string, so we know that a <code class="literal1">Match</code> object will be returned. Knowing that <code class="literal1">mo</code> contains a <code class="literal1">Match</code> object and not the null value <code class="literal1">None</code>, we can call <code class="literal1">group()</code> on <code class="literal1">mo</code> to return the match. Writing <code class="literal1">mo.group()</code> inside our print statement displays the whole match, <code class="literal1">415-555-4242</code>.</p>
+</div>
+<div class="book" title="Review of Regular Expression Matching">
+<div class="titlepage">
+<div class="book">
+<div class="book">
+<h2 class="title3"><a id="calibre_link-2560" class="firstname"></a>Review of Regular Expression Matching</h2>
+</div>
+</div>
+</div>
+<p class="calibre4"><a id="calibre_link-183" class="calibre1"></a><a id="calibre_link-351" class="calibre1"></a><a id="calibre_link-767" class="calibre1"></a><a id="calibre_link-768" class="calibre1"></a><a id="calibre_link-1208" class="calibre1"></a><a id="calibre_link-1456" class="calibre1"></a>While there are several steps to using regular expressions in Python, each step is fairly simple.</p>
+<div class="book">
+<ol class="orderedlist">
+<li class="listitem">
+<p class="calibre4">Import the regex module with <code class="literal1">import re</code>.</p>
+</li>
+<li class="listitem">
+<p class="calibre4">Create a <code class="literal1">Regex</code> object with the <code class="literal1">re.compile()</code> function. (Remember to use a raw string.)</p>
+</li>
+<li class="listitem">
+<p class="calibre4">Pass the string you want to search into the <code class="literal1">Regex</code> object’s <code class="literal1">search()</code> method. This returns a <code class="literal1">Match</code> object.</p>
+</li>
+<li class="listitem">
+<p class="calibre4">Call the <code class="literal1">Match</code> object’s <code class="literal1">group()</code> method to return a string of the actual matched text.</p>
+</li>
+</ol>
+</div>
+<div class="note" title="Note">
+<h3 class="title5"><a id="calibre_link-2561" class="calibre1"></a>Note</h3>
+<p class="calibre4"><span class="calibre1"><em class="calibre5">While I encourage you to enter the example code into the interactive shell, you should also make use of web-based regular expression testers, which can show you exactly how a regex matches a piece of text that you enter. I recommend the tester at</em></span> <a class="ulink" href="http://regexpal.com/">http://regexpal.com/</a>.</p>
+</div>
+</div>
+</div>
+<div class="book" title="More Pattern Matching with Regular Expressions">
+<div class="titlepage">
+<div class="book">
+<div class="book">
+<h1 class="title2"><a id="calibre_link-2562" class="firstname"></a>More Pattern Matching with Regular Expressions</h1>
+</div>
+</div>
+</div>
+<p><a href="https://youtu.be/QQVDWnnieOw"><img src="./chapter7_files/youtubelogo.png"> Lesson 24 - Groups</a></p>
+<p class="calibre4">Now that you know the basic steps for creating and finding regular expression objects with Python, you’re ready to try some of their more powerful pattern-matching capabilities.</p>
+<div class="book" title="Grouping with Parentheses">
+<div class="titlepage">
+<div class="book">
+<div class="book">
+<h2 class="title3"><a id="calibre_link-2563" class="firstname"></a>Grouping with Parentheses</h2>
+</div>
+</div>
+</div>
+<p class="calibre4">Say you want to separate the area code from the rest of the phone number. Adding parentheses will create <span class="calibre1"><em class="calibre5">groups</em></span> in the regex: <code class="literal1">(\d\d\d)-(\d\d\d-\d\d\d\d)</code>. Then you can use the <code class="literal1">group()</code> match object method to grab the matching text from just one group.</p>
+<p class="calibre4">The first set of parentheses in a regex string will be group <code class="literal1">1</code>. The second set will be group <code class="literal1">2</code>. By passing the integer <code class="literal1">1</code> or <code class="literal1">2</code> to the <code class="literal1">group()</code> match object method, you can grab different parts of the matched text. Passing <code class="literal1">0</code> or nothing to the <code class="literal1">group()</code> method will return the entire matched text. Enter the following into the interactive shell:</p>
+<p><a id="calibre_link-2564" class="calibre1"></a>
+</p><pre class="programlisting">&gt;&gt;&gt; <span class="calibre1"><strong class="literal">phoneNumRegex = re.compile(r'(\d\d\d)-(\d\d\d-\d\d\d\d)')</strong></span>
+&gt;&gt;&gt; <span class="calibre1"><strong class="literal">mo = phoneNumRegex.search('My number is 415-555-4242.')</strong></span>
+&gt;&gt;&gt; <span class="calibre1"><strong class="literal">mo.group(1)</strong></span>
+'415'
+&gt;&gt;&gt; <span class="calibre1"><strong class="literal">mo.group(2)</strong></span>
+'555-4242'
+&gt;&gt;&gt; <span class="calibre1"><strong class="literal">mo.group(0)</strong></span>
+'415-555-4242'
+&gt;&gt;&gt; <span class="calibre1"><strong class="literal">mo.group()</strong></span>
+'415-555-4242'</pre>
+<p class="calibre4"><a id="calibre_link-184" class="calibre1"></a><a id="calibre_link-769" class="calibre1"></a><a id="calibre_link-1275" class="calibre1"></a><a id="calibre_link-1457" class="calibre1"></a>If you would like to retrieve all the groups at once, use the <code class="literal1">groups()</code> method—note the plural form for the name.</p>
+<p><a id="calibre_link-2565" class="calibre1"></a>
+</p><pre class="programlisting">&gt;&gt;&gt; <span class="calibre1"><strong class="literal">mo.groups()</strong></span>
+('415', '555-4242')
+&gt;&gt;&gt; <span class="calibre1"><strong class="literal">areaCode, mainNumber = mo.groups()</strong></span>
+&gt;&gt;&gt; <span class="calibre1"><strong class="literal">print(areaCode)</strong></span>
+415
+&gt;&gt;&gt; <span class="calibre1"><strong class="literal">print(mainNumber)</strong></span>
+555-4242</pre>
+<p class="calibre4">Since <code class="literal1">mo.groups()</code> returns a tuple of multiple values, you can use the multiple-assignment trick to assign each value to a separate variable, as in the previous <code class="literal1">areaCode, mainNumber = mo.groups()</code> line.</p>
+<p class="calibre4">Parentheses have a special meaning in regular expressions, but what do you do if you need to match a parenthesis in your text? For instance, maybe the phone numbers you are trying to match have the area code set in parentheses. In this case, you need to escape the <code class="literal1">(</code> and <code class="literal1">)</code> characters with a backslash. Enter the following into the interactive shell:</p>
+<p><a id="calibre_link-2566" class="calibre1"></a>
+</p><pre class="programlisting">&gt;&gt;&gt; <span class="calibre1"><strong class="literal">phoneNumRegex = re.compile(r'(\(\d\d\d\)) (\d\d\d-\d\d\d\d)')</strong></span>
+&gt;&gt;&gt; <span class="calibre1"><strong class="literal">mo = phoneNumRegex.search('My phone number is (415) 555-4242.')</strong></span>
+&gt;&gt;&gt; <span class="calibre1"><strong class="literal">mo.group(1)</strong></span>
+'(415)'
+&gt;&gt;&gt; <span class="calibre1"><strong class="literal">mo.group(2)</strong></span>
+'555-4242'</pre>
+<p class="calibre4">The <code class="literal1">\(</code> and <code class="literal1">\)</code> escape characters in the raw string passed to <code class="literal1">re.compile()</code> will match actual parenthesis characters.</p>
+</div>
+<div class="book" title="Matching Multiple Groups with the Pipe">
+<div class="titlepage">
+<div class="book">
+<div class="book">
+<h2 class="title3"><a id="calibre_link-2567" class="firstname"></a>Matching Multiple Groups with the Pipe</h2>
+</div>
+</div>
+</div>
+<p class="calibre4">The <code class="literal1">|</code> character is called a <span class="calibre1"><em class="calibre5">pipe</em></span>. You can use it anywhere you want to match one of many expressions. For example, the regular expression <code class="literal1">r'Batman|Tina Fey'</code> will match either <code class="literal1">'Batman'</code> or <code class="literal1">'Tina Fey'</code>.</p>
+<p class="calibre4">When <span class="calibre1"><em class="calibre5">both</em></span> Batman and Tina Fey occur in the searched string, the first occurrence of matching text will be returned as the <code class="literal1">Match</code> object. Enter the following into the interactive shell:</p>
+<p><a id="calibre_link-2568" class="calibre1"></a>
+</p><pre class="programlisting">&gt;&gt;&gt; <span class="calibre1"><strong class="literal">heroRegex = re.compile (r'Batman|Tina Fey')</strong></span>
+&gt;&gt;&gt; <span class="calibre1"><strong class="literal">mo1 = heroRegex.search('Batman and Tina Fey.')</strong></span>
+&gt;&gt;&gt; <span class="calibre1"><strong class="literal">mo1.group()</strong></span>
+'Batman'
+
+&gt;&gt;&gt; <span class="calibre1"><strong class="literal">mo2 = heroRegex.search('Tina Fey and Batman.')</strong></span>
+&gt;&gt;&gt; <span class="calibre1"><strong class="literal">mo2.group()</strong></span>
+'Tina Fey'</pre>
+<div class="note" title="Note">
+<h3 class="title5"><a id="calibre_link-2569" class="calibre1"></a>Note</h3>
+<p class="calibre4"><span class="calibre1"><em class="calibre5">You can find</em></span> all <span class="calibre1"><em class="calibre5">matching occurrences with the <code class="literal3">findall()</code> method that’s discussed in <a class="ulink" href="https://automatetheboringstuff.com/chapter7/#calibre_link-60" title="The findall() Method">The findall() Method</a>.</em></span></p>
+</div>
+<p class="calibre4"><a id="calibre_link-192" class="calibre1"></a><a id="calibre_link-770" class="calibre1"></a><a id="calibre_link-1420" class="calibre1"></a><a id="calibre_link-1458" class="calibre1"></a>You can also use the pipe to match one of several patterns as part of your regex. For example, say you wanted to match any of the strings <code class="literal1">'Batman'</code>, <code class="literal1">'Batmobile'</code>, <code class="literal1">'Batcopter'</code>, and <code class="literal1">'Batbat'</code>. Since all these strings start with <code class="literal1">Bat</code>, it would be nice if you could specify that prefix only once. This can be done with parentheses. Enter the following into the interactive shell:</p>
+<p><a id="calibre_link-2570" class="calibre1"></a>
+</p><pre class="programlisting">&gt;&gt;&gt; <span class="calibre1"></span></pre></div></div></div></div></div></article></div></body></html>
